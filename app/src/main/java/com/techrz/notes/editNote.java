@@ -2,9 +2,11 @@ package com.techrz.notes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class editNote extends AppCompatActivity {
     ImageButton back, save;
@@ -22,16 +24,37 @@ public class editNote extends AppCompatActivity {
         topic = findViewById(R.id.edittopic);
         date = findViewById(R.id.editdate);
         note = findViewById(R.id.editnote);
+        back.setOnClickListener(v->finish());
+        save.setOnClickListener(v->saveEditedNotes());
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             noteID = extras.getInt("noteID");
         }
-        back.setOnClickListener(v->finish());
-        String notes[] = new String[4];
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        String notes[];
         notes = DB.getNote(noteID);
         courseID.setText(notes[0]);
         topic.setText(notes[1]);
         date.setText(notes[2]);
         note.setText(notes[3]);
+    }
+    void saveEditedNotes(){
+        String prvcourseID = courseID.getText().toString().trim();
+        String prvtopic = topic.getText().toString().trim();
+        String prvdate = date.getText().toString().trim();
+        String prvnote = note.getText().toString().trim();
+        Boolean noError = DB.updateNote(noteID, prvcourseID, prvtopic, prvdate, prvnote);
+        if(noError==true){
+            mainPage();
+        }
+        else System.out.println("Got some error");
+    }
+    void mainPage(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

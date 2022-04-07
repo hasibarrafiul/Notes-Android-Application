@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         createNotes.setOnClickListener(v-> createNotes());
         showNotes = findViewById(R.id.showNotes);
         DB= new MyDatabaseHelper(this);
-        loadDatainList();
     }
     void createNotes(){
         Intent intent = new Intent(this, createNotes.class);
@@ -41,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
+    protected void onStart() {
+        super.onStart();
         loadDatainList();
     }
 }

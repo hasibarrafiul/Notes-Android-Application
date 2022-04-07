@@ -80,5 +80,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         return noteArray;
     }
+    public Boolean updateNote(int noteID, String courseID, String topic, String date, String note){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("courseID", courseID);
+        contentValues.put("topic", topic);
+        contentValues.put("date", date);
+        contentValues.put("note", note);
+
+        long result = DB.update("notes",contentValues, "noteid = ?", new String[]{String.valueOf(noteID)});
+        if(result==-1) return false;
+        else return true;
+    }
 
 }
