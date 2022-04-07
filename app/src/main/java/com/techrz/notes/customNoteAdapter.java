@@ -1,6 +1,7 @@
 package com.techrz.notes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,10 @@ public class customNoteAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 int id = allNotes.getID();
-                System.out.println(id);
+                Intent intent = new Intent(context, editNote.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("noteID", id);
+                context.startActivity(intent);
+
             }
         });
 

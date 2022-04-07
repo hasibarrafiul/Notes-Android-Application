@@ -62,12 +62,23 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             String topic = getProblem.getString(2);
             String date = getProblem.getString(3);
             String note = getProblem.getString(4);
-            System.out.println(courseID);
 
             allNotes allNotes = new allNotes(noteid, courseID, topic, date, note);
             arrayList.add(allNotes);
         }
         return arrayList;
+    }
+    public String[] getNote(int noteID){
+        String noteArray[] = new String[4];
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor getNote = sqLiteDatabase.rawQuery("SELECT courseID, topic, date, note FROM notes WHERE noteid="+noteID+";",null);
+        while(getNote.moveToNext()) {
+            noteArray[0] = getNote.getString(0);
+            noteArray[1] = getNote.getString(1);
+            noteArray[2] = getNote.getString(2);
+            noteArray[3] = getNote.getString(3);
+        }
+        return noteArray;
     }
 
 }
