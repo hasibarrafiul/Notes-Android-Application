@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         exit = findViewById(R.id.exit);
         createNotes = findViewById(R.id.createNotes);
-        exit.setOnClickListener(v-> finish());
+        exit.setOnClickListener(v-> finishAffinity());
         createNotes.setOnClickListener(v-> createNotes());
         showNotes = findViewById(R.id.showNotes);
         DB= new MyDatabaseHelper(this);
