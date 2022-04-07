@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class editNote extends AppCompatActivity {
-    ImageButton back, save;
+    ImageButton back, save, delete;
     private int noteID;
     MyDatabaseHelper DB;
     EditText courseID, topic, date, note;
@@ -20,12 +20,14 @@ public class editNote extends AppCompatActivity {
         DB= new MyDatabaseHelper(this);
         back = findViewById(R.id.editgoBack);
         save = findViewById(R.id.editsave);
+        delete = findViewById(R.id.delete);
         courseID = findViewById(R.id.editcourseId);
         topic = findViewById(R.id.edittopic);
         date = findViewById(R.id.editdate);
         note = findViewById(R.id.editnote);
         back.setOnClickListener(v->finish());
         save.setOnClickListener(v->saveEditedNotes());
+        delete.setOnClickListener(v->deleteNote());
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             noteID = extras.getInt("noteID");
@@ -56,5 +58,12 @@ public class editNote extends AppCompatActivity {
     void mainPage(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+    void deleteNote(){
+        Boolean noError = DB.deleteNote(noteID);
+        if(noError==true){
+            mainPage();
+        }
+        else System.out.println("Got some error");
     }
 }

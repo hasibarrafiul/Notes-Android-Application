@@ -93,4 +93,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         else return true;
     }
 
+    public Boolean deleteNote(int noteID){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        long result = DB.delete("notes", "noteid = ?", new String[]{String.valueOf(noteID)});
+        if(result==-1) return false;
+        else return true;
+    }
+
 }
