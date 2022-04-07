@@ -5,15 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class customProblemAdapter extends BaseAdapter {
+public class customNoteAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<allNotes> arrayList;
-    public customProblemAdapter(Context context, ArrayList<allNotes> arrayList){
+    public customNoteAdapter(Context context, ArrayList<allNotes> arrayList){
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -42,11 +43,21 @@ public class customProblemAdapter extends BaseAdapter {
 
         TextView title = rowView.findViewById(R.id.courseIDShow);
         TextView post_type = rowView.findViewById(R.id.topicShow);
+        TextView date_show = rowView.findViewById(R.id.dateShow);
+        ImageButton edit = rowView.findViewById(R.id.editOrDelete);
 
         allNotes allNotes = arrayList.get(position);
 
         title.setText(allNotes.getCourseID());
         post_type.setText(allNotes.getTopic());
+        date_show.setText(allNotes.getDate());
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int id = allNotes.getID();
+                System.out.println(id);
+            }
+        });
 
         return rowView;
     }

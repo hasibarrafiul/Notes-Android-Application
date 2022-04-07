@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -13,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageButton createNotes, exit;
     ArrayList<allNotes> arrayList;
-    customProblemAdapter customProblemAdapter;
+    customNoteAdapter customNoteAdapter;
     private ListView showNotes;
     MyDatabaseHelper DB;
     @Override
@@ -34,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
     }
     public void loadDatainList(){
         arrayList = DB.getProblems();
-        customProblemAdapter = new customProblemAdapter(this,arrayList);
-        showNotes.setAdapter(customProblemAdapter);
-        customProblemAdapter.notifyDataSetChanged();
+        customNoteAdapter = new customNoteAdapter(this,arrayList);
+        showNotes.setAdapter(customNoteAdapter);
+        customNoteAdapter.notifyDataSetChanged();
     }
 
     @Override
