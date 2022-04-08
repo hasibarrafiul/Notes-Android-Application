@@ -59,7 +59,6 @@ public class customNoteAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, editNote.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("noteID", id);
                 context.startActivity(intent);
-
             }
         });
 

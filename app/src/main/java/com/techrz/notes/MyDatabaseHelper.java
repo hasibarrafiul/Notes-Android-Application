@@ -27,7 +27,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try{
-            db.execSQL("Create TABLE notes (noteid INTEGER PRIMARY KEY AUTOINCREMENT,courseID varchar(50),topic varchar(50) UNIQUE,date varchar(20),note varchar(5000));");
+            db.execSQL("Create TABLE notes (noteid INTEGER PRIMARY KEY AUTOINCREMENT,courseID varchar(50),topic varchar(50),date varchar(20),note varchar(5000));");
             System.out.println("Table Created");
         }
         catch (Exception e){
